@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.developia.boot_article.dao.ArticleDAO">
+	<insert id="insertArticle">
+		<selectKey resultType="long" keyProperty="bno" order="BEFORE">
+	        SELECT MAX(bno)+1 FROM board        
+		</selectKey>
+		INSERT INTO board(bno, title, name, password, content) 
+		VALUES(#{bno}, #{title}, #{name}, #{password}, #{content})
+	</insert>
+	
+	<select id="getArticleCount" resultType="long">
+	SELECT count(*) as cnt 
+	FROM   board
+	</select>
+
+	<select id="getArticleListPage" resultType="ArticleDTO">
+	SELECT B.*
+	FROM (SELECT  rownum AS rnum, A.*
+	      FROM	(SELECT bno, title, name, regdate, readcount
+		         FROM   board
+	             ORDER  BY bno DESC) A) B
+	WHERE rnum BETWEEN #{startNum} AND #{endNum}
+	</select>
+
+	<select id="getDetail" resultType="ArticleDTO">
+	SELECT
+	    bno,
+	    title,
+	    NAME,
+	    CONTENT,
+	    regdate,
+	    readcount
+	FROM
+	    board
+	WHERE
+		bno = #{bno}
+	</select>
+	
+	<update id="updateReadcount" parameterType="long">
+	UPDATE board SET readcount=readcount+1 WHERE bno=#{bno}
+	</update>
+	
+	<update id="updateArticle" parameterType="ArticleDTO">
+	UPDATE board SET
+	       title=#{title},
+	       name =#{name},
+	       content=#{content}
+	WHERE  bno=#{bno} AND password=#{password}
+	</update>
+	
+	<delete id="deleteArticle" parameterType="ArticleDTO">
+	DELETE board
+	WHERE  bno=#{bno} AND password=#{password}
+	</delete>
+</mapper>

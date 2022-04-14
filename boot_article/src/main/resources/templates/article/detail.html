@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<table border="1">
+	<caption>게시물 상세보기</caption>
+<tr>
+	<th>번호</th>
+	<td th:text="${articleDTO.bno}"></td>
+</tr>
+<tr>
+	<th>제목</th>
+	<td th:text="${articleDTO.title}"></td>
+</tr>
+<tr>
+	<th>작성자</th>
+	<td th:text="${articleDTO.name}"></td>
+</tr>
+<tr>
+	<th>내용</th>
+	<td th:text="${articleDTO.content}"></td>
+</tr>
+<tr>
+	<th>작성일</th>
+	<td th:text="${#calendars.format(articleDTO.regdate, 'yyyy-MM-dd')}" /></td>
+</tr>
+<tr>
+	<th>조회수</th>
+	<td th:text="${articleDTO.readcount}" />
+</tr>
+</table><br/>
+<a href="list">리스트</a> |
+<a href="update">수정</a> |
+<a href="delete">삭제</a>
+</body>
+</html>

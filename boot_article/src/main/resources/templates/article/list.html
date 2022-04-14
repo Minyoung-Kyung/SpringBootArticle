@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<table border="1">
+<caption>게시물 리스트</caption>
+<tr>
+	<td colspan="5">현재페이지:[[${pg}]] / 전체페이지수:[[${pageCount}]]</td>
+</tr>
+<tr>
+	<th>번호</th>
+	<th>제목</th>
+	<th>작성자</th>
+	<th>작성일</th>
+	<th>조회수</th>
+</tr>
+<tr th:each="dto: ${list}">
+	<td th:text="${dto.bno}" />
+	<td><a th:href="@{./{bno}/(bno=${dto.bno})}">[[${dto.title}]]</a></td>
+	<td th:text="${dto.name}" />
+	<td th:text="${#calendars.format(dto.regdate, 'yyyy-MM-dd')}" /></td>
+	<td th:text="${dto.readcount}" />
+</tr>
+<tr>
+	<td colspan="5">
+		<span th:each="p: ${#numbers.sequence(startPage,endPage)}">
+			<a th:href="@{../{p}/(p=${p})}">[[${p}]]</a>
+		</span>
+	</td>
+</tr>
+</table><br/>
+<a href="insert">글쓰기</a>
+</body>
+</html>
