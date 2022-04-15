@@ -26,10 +26,23 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<td th:text="${#calendars.format(dto.regdate, 'yyyy-MM-dd')}" /></td>
 	<td th:text="${dto.readcount}" />
 </tr>
-<tr>
+<tr th:if="${pageCount != 0}">
 	<td colspan="5">
+		<span th:if="${startPage != 1}">
+			[<a th:href="@{../{sp}/(sp=${startPage-1})}">이전블럭</a>]
+		</span>
+		
 		<span th:each="p: ${#numbers.sequence(startPage,endPage)}">
-			<a th:href="@{../{p}/(p=${p})}">[[${p}]]</a>
+			<span th:if="${p != pg}">
+				<a th:href="@{../{p}/(p=${p})}">[[${p}]]</a>
+			</span>
+			<span th:if="${p == pg}">
+				[[${p}]]
+			</span>
+		</span>
+
+		<span th:if="${endPage != pageCount}">
+			[<a th:href="@{../{sp}/(sp=${endPage+1})}">다음블럭</a>]
 		</span>
 	</td>
 </tr>
