@@ -19,7 +19,7 @@ public class ArticleServiceImpl implements ArticleService {
 	private ArticleDAO articleDAO;
 
 	@Value("${pageSize}")
-	private int pageSize = 10;
+	private int pageSize;
 
 	@Override
 	public void insertArticle(ArticleDTO articleDTO) throws Exception {

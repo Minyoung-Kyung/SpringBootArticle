@@ -25,10 +25,10 @@ public class ArticleController {
 	private ArticleService articleService;
 
 	@Value("${pageSize}")
-	private long pageSize = 10;
+	private long pageSize;
 	
 	@Value("${blockSize}")
-	private long blockSize = 10;
+	private long blockSize;
 	
 	@GetMapping("insert")
 	public String insertArticle() {
