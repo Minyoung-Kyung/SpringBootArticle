@@ -18,7 +18,7 @@ public class ArticleServiceImpl implements ArticleService {
 	@Autowired
 	private ArticleDAO articleDAO;
 
-	//@Value("${pageSize}")
+	@Value("${pageSize}")
 	private int pageSize = 10;
 
 	@Override

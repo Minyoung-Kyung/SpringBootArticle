@@ -3,6 +3,7 @@ package net.developia.boot_article.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +24,10 @@ public class ArticleController {
 	@Autowired
 	private ArticleService articleService;
 
-	//@Value("${pageSize}")
+	@Value("${pageSize}")
 	private long pageSize = 10;
 	
-	//@Value("${blockSize}")
+	@Value("${blockSize}")
 	private long blockSize = 10;
 	
 	@GetMapping("insert")
